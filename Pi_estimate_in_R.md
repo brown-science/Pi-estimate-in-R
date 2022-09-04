@@ -11,13 +11,23 @@ $f(x) = (1-x^2)^\\frac{1}{2}$
 
 ``` r
 library(ggplot2)
+x = seq(-1, 1, .01)
 fun <- function(x) {(1 - x^2)^.5}
+y = fun(x)
+
+half_circle = data.frame(x, y)
 
 p <- ggplot() +
-  xlim(c(0,1.2)) +
-  geom_function(fun = fun)
-curve(fun(x), xlim = c(-1.2,1.2), ylim = c(0,1.2), col = "red")
+ geom_function(fun = fun, color = "aquamarine") +
+ xlim(c(-1.2,1.2)) +
+ ylim(c(0, 1.2)) +
+ theme_minimal() +
+ coord_fixed()
+  
+p
 ```
+
+    ## Warning: Removed 18 row(s) containing missing values (geom_path).
 
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
