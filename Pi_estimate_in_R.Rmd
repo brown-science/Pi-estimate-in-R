@@ -144,7 +144,8 @@ For a numerical estimate of pi, we simply integrate under the Quarter unit circl
 
 ```{r}
 integrand = function(x) {(1-x^2)^.5}
-quarter_area <- 0.7853983
+answer <- integrate(integrand, lower = 0, upper = 1)
+quarter_area <- answer[[1]]
 pi_est <- quarter_area * 4
 pi_est
 ```

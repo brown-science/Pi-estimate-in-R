@@ -7,11 +7,16 @@ John Brown
 
 Here I’ll approximate pi with a Monte Carlo simulation and through
 integration. I’ll do this through use of a semi unit circle function:
-$f(x) = (1-x^2)^\\frac{1}{2}$
+![f(x) = (1-x^2)^\frac{1}{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%20%3D%20%281-x%5E2%29%5E%5Cfrac%7B1%7D%7B2%7D "f(x) = (1-x^2)^\frac{1}{2}")
 
 ``` r
 #install.packages("latex2exp")
 library(latex2exp)
+```
+
+    ## Warning: package 'latex2exp' was built under R version 4.1.3
+
+``` r
 library(ggplot2)
 
 x = seq(-1, 1, .0001)
@@ -62,12 +67,18 @@ quarter_p
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 Since the radius of the unit circle is 1 and the formula for the area of
-a circle is *π**r*<sup>2</sup>, the area of the unit circle is *π*.
-Therefore the area of the quarter unit circle is $\\frac{\\pi}{4}$. For
-a Monte Carlo estimation of *π* I’ll sample from a bivariate standard
-uniform distribution. The standard uniform distribution has an equal
-probability of producing values from 0 to 1. So, each bivariate sample
-will be a point within the bounds of the unit square, see below:
+a circle is
+![\pi r^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cpi%20r%5E2 "\pi r^2"),
+the area of the unit circle is
+![\pi](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cpi "\pi").
+Therefore the area of the quarter unit circle is
+![\frac{\pi}{4}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%5Cpi%7D%7B4%7D "\frac{\pi}{4}").
+For a Monte Carlo estimation of
+![\pi](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cpi "\pi")
+I’ll sample from a bivariate standard uniform distribution. The standard
+uniform distribution has an equal probability of producing values from 0
+to 1. So, each bivariate sample will be a point within the bounds of the
+unit square, see below:
 
 ``` r
 library(dplyr)
@@ -102,16 +113,20 @@ quarter_p +
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 The above plot shows 100 randomly sampled points. If we count the number
-of (x, y) pairs the satisfy $\\sqrt{x^2 + y^2} \\ \\leq \\ 1$ (blue
-dots) and divide by the total number of points sampled (100), we will
-get the proportion of points that fell within the quarter unit circle.
-this should approximate $\\frac{\\pi}{4}$
+of (x, y) pairs the satisfy
+![\sqrt{x^2 + y^2} \\ \leq \\ 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7Bx%5E2%20%2B%20y%5E2%7D%20%5C%20%5Cleq%20%5C%201 "\sqrt{x^2 + y^2} \ \leq \ 1")
+(blue dots) and divide by the total number of points sampled (100), we
+will get the proportion of points that fell within the quarter unit
+circle. this should approximate
+![\frac{\pi}{4}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%5Cpi%7D%7B4%7D "\frac{\pi}{4}")
 
 ## Monte Carlo simulation
 
 I’ll now repeat this process with 1 million points and plot distrubution
-of points that satisfy $\\sqrt{x^2 + y^2} \\ \\leq \\ 1$ The shape of
-the histogram should approximate the are under the quarter unit circle
+of points that satisfy
+![\sqrt{x^2 + y^2} \\ \leq \\ 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7Bx%5E2%20%2B%20y%5E2%7D%20%5C%20%5Cleq%20%5C%201 "\sqrt{x^2 + y^2} \ \leq \ 1")
+The shape of the histogram should approximate the are under the quarter
+unit circle
 
 ``` r
 # Makes a list of 10 lists that will each contain 2K  newly generated points over 
@@ -172,17 +187,18 @@ MC_pi <- prop_in_circle * 4
 MC_pi
 ```
 
-    ## [1] 3.141942
+    ## [1] 3.140637
 
 ## Numeric estimation of pi
 
 For a numerical estimate of pi, we simply integrate under the Quarter
 unit circle function. Below I’ll show
-$\\pi \\approx\\int\_0^1 \\left(1-x^2\\right)^{\\frac{1}{2}} dx \\ \\ \* \\ 4$
+![\pi \approx\int_0^1 \left(1-x^2\right)^{\frac{1}{2}} dx \\ \\ \* \\ 4](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cpi%20%5Capprox%5Cint_0%5E1%20%5Cleft%281-x%5E2%5Cright%29%5E%7B%5Cfrac%7B1%7D%7B2%7D%7D%20dx%20%5C%20%5C%20%2A%20%5C%204 "\pi \approx\int_0^1 \left(1-x^2\right)^{\frac{1}{2}} dx \ \ * \ 4")
 
 ``` r
 integrand = function(x) {(1-x^2)^.5}
-quarter_area <- 0.7853983
+answer <- integrate(integrand, lower = 0, upper = 1)
+quarter_area <- answer[[1]]
 pi_est <- quarter_area * 4
 pi_est
 ```
