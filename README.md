@@ -61,7 +61,6 @@ quarter_p = p +
 quarter_p
 ```
 
-    ## Warning: Removed 10000 row(s) containing missing values (geom_path).
 
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
