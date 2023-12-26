@@ -17,7 +17,6 @@ integration. I’ll do this through use of a semi unit circle function:
 library(latex2exp)
 ```
 
-    ## Warning: package 'latex2exp' was built under R version 4.1.3
 
 ``` r
 library(ggplot2)
@@ -40,9 +39,6 @@ p +
   annotate("text", x = .95, y= 1.1, label = TeX("$f(x) = (1-x^2)^{1/2}$"), parse = TRUE) +
   labs(title = "Semi Unit Circle")
 ```
-
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
 
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
@@ -110,9 +106,6 @@ bivariate_df <- bivariate_df %>%
 quarter_p + 
   geom_point(data = bivariate_df, aes(x_sample , y_sample, col = in_circle)) 
 ```
-
-    ## Warning: Removed 10000 row(s) containing missing values (geom_path).
-
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 The above plot shows 100 randomly sampled points. If we count the number
@@ -176,7 +169,6 @@ ggplot(master_list, aes(x = master_list, fill = cut(master_list,100))) +
   scale_fill_discrete(h = c(180, 360), c = 150, l = 80)
 ```
 
-    ## Warning: Removed 200 rows containing missing values (geom_bar).
 
 ![](Pi_estimate_in_R_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
